@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --outDir ./dist --project ./tsconfig.json",
-    "test": "mocha -r ts-node/register test/**.ts",
+    "test": "nyc --reporter=lcov mocha -r ts-node/register test/**.ts",
     "prepare": "yarn run build",
     "build-demo": "browserify ./demo/web-components/cambria-demo.js -o ./demo/bundle.js"
   },
@@ -28,6 +28,7 @@
     "ajv": "^6.12.6",
     "assert": "^2.1.0",
     "browserify": "^16.5.2",
+    "codecov": "^3.8.3",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^6.15.0",
@@ -36,6 +37,7 @@
     "eslint-plugin-prettier": "^5.2.6",
     "json-schema-view-js": "^2.0.1",
     "mocha": "^8.4.0",
+    "nyc": "^17.1.0",
     "prettier": "^2.8.8",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.10"
