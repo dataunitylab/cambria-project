@@ -1,4 +1,5 @@
 # Cambria
+[![CI](https://github.com/dataunitylab/cambria-project/actions/workflows/ci.yml/badge.svg)](https://github.com/dataunitylab/cambria-project/actions/workflows/ci.yml)
 
 Cambria is a Javascript/Typescript library for converting JSON data between related schemas.
 
