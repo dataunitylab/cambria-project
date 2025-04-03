@@ -1020,7 +1020,7 @@ __metadata:
     eslint-plugin-import: "npm:^2.22.0"
     eslint-plugin-jsx-a11y: "npm:^6.3.1"
     eslint-plugin-prettier: "npm:^5.2.6"
-    fast-json-patch: "npm:^3.0.0-1"
+    fast-json-patch: "npm:^3.1.1"
     graphlib: "npm:^2.1.8"
     js-yaml: "npm:^3.14.0"
     json-schema: "npm:^0.2.5"
@@ -1976,10 +1976,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-json-patch@npm:^3.0.0-1":
-  version: 3.0.0-1
-  resolution: "fast-json-patch@npm:3.0.0-1"
-  checksum: 10c0/0e8bbfca18f7fc138a6aaf32cf912650703865f96244f906fc512780e066845ba33923f8e0948b4b12c4ba88846c1ee557c5b7c2eb0087473f3840846b1cfcc5
+"fast-json-patch@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "fast-json-patch@npm:3.1.1"
+  checksum: 10c0/8a0438b4818bb53153275fe5b38033610e8c9d9eb11869e6a7dc05eb92fa70f3caa57015e344eb3ae1e71c7a75ad4cc6bc2dc9e0ff281d6ed8ecd44505210ca8
   languageName: node
   linkType: hard
 
