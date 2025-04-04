@@ -1,5 +1,5 @@
 import YAML from "js-yaml";
-import { LensSource, LensOp } from "./lens-ops";
+import type { LensSource, LensOp } from "./lens-ops";
 
 interface YAMLLens {
   lens: LensSource;

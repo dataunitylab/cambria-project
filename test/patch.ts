@@ -1,8 +1,9 @@
 import assert from "assert";
-import { Patch, applyLensToPatch, PatchOp, expandPatch } from "../src/patch";
+import type { Patch, PatchOp } from "../src/patch";
+import { applyLensToPatch, expandPatch } from "../src/patch";
 import { applyLensToDoc } from "../src/doc";
 import { updateSchema, schemaForLens } from "../src/json-schema";
-import { LensSource } from "../src/lens-ops";
+import type { LensSource } from "../src/lens-ops";
 import {
   renameProperty,
   addProperty,
@@ -16,10 +17,10 @@ import {
 } from "../src/helpers";
 
 import { reverseLens } from "../src/reverse";
-import { ReplaceOperation } from "fast-json-patch";
-import { JSONSchema7 } from "json-schema";
+import type { ReplaceOperation } from "fast-json-patch";
+import type { JSONSchema7 } from "json-schema";
 
-export interface ProjectV1 {
+interface ProjectV1 {
   title: string;
   tasks: { title: string }[];
   complete: boolean;
@@ -29,7 +30,7 @@ export interface ProjectV1 {
   };
 }
 
-export interface ProjectV2 {
+interface ProjectV2 {
   name: string;
   description: string;
   issues: { title: string }[];
@@ -863,6 +864,7 @@ describe("patch expander", () => {
     ]);
 
     // deepEqual returns true for {} === []; so we need to double check ourselves
+    // biome-ignore lint/suspicious/noExplicitAny: all values allowed
     const op = expandPatch(setObject)[0] as ReplaceOperation<any>;
     assert(Array.isArray(op.value));
   });

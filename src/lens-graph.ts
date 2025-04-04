@@ -1,7 +1,8 @@
 import { Graph, alg, json } from "graphlib";
-import { LensSource, LensOp, updateSchema, reverseLens } from ".";
+import type { LensSource, LensOp } from ".";
+import { updateSchema, reverseLens } from ".";
 import { emptySchema } from "./json-schema";
-import { JSONSchema7 } from "json-schema";
+import type { JSONSchema7 } from "json-schema";
 
 export interface LensGraph {
   graph: Graph;
@@ -74,13 +75,13 @@ export function lensFromTo(
 
   const migrationPaths = alg.dijkstra(graph, to);
   const lenses: LensOp[] = [];
-  if (migrationPaths[from].distance == Infinity) {
+  if (migrationPaths[from].distance === Number.POSITIVE_INFINITY) {
     throw new Error(`no path found from ${from} to ${to}`);
   }
-  if (migrationPaths[from].distance == 0) {
+  if (migrationPaths[from].distance === 0) {
     return [];
   }
-  for (let v = from; v != to; v = migrationPaths[v].predecessor) {
+  for (let v = from; v !== to; v = migrationPaths[v].predecessor) {
     const w = migrationPaths[v].predecessor;
     const edge = graph.edge({ v, w });
     lenses.push(...edge);

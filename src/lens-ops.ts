@@ -1,8 +1,9 @@
-import { JSONSchema7TypeName } from "json-schema";
+import type { JSONSchema7TypeName } from "json-schema";
 
 export interface Property {
   name?: string;
   type: JSONSchema7TypeName | JSONSchema7TypeName[];
+  // biome-ignore lint/suspicious/noExplicitAny: any values allowed
   default?: any;
   required?: boolean;
   items?: Property;
@@ -56,6 +57,7 @@ export interface LensMap {
 
 // ideally this would be a tuple, but the typechecker
 // wouldn't let me assign a flipped array in the reverse lens op
+// biome-ignore lint/suspicious/noExplicitAny: any values allowed
 export type ValueMapping = { [key: string]: any }[];
 
 // Notes on value conversion:

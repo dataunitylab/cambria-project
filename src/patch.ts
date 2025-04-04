@@ -1,6 +1,6 @@
-import { Operation } from "fast-json-patch";
-import { JSONSchema7 } from "json-schema";
-import { LensSource, LensOp } from "./lens-ops";
+import type { Operation } from "fast-json-patch";
+import type { JSONSchema7 } from "json-schema";
+import type { LensSource, LensOp } from "./lens-ops";
 import { reverseLens } from "./reverse";
 import { addDefaultValues } from "./defaults";
 import { updateSchema } from "./json-schema";
@@ -10,7 +10,7 @@ import { updateSchema } from "./json-schema";
 export type PatchOp = Operation;
 type MaybePatchOp = PatchOp | null;
 export type Patch = Operation[];
-export type CompiledLens = (patch: Patch, targetDoc: any) => Patch;
+export type CompiledLens = (patch: Patch, targetDoc: object) => Patch;
 
 function assertNever(x: never): never {
   throw new Error(`Unexpected object: ${x}`);
@@ -30,9 +30,9 @@ export function compile(lensSource: LensSource): {
   left: CompiledLens;
 } {
   return {
-    right: (patch: Patch, targetDoc: any) =>
+    right: (patch: Patch, targetDoc: object) =>
       applyLensToPatch(lensSource, patch, targetDoc),
-    left: (patch: Patch, targetDoc: any) =>
+    left: (patch: Patch, targetDoc: object) =>
       applyLensToPatch(reverseLens(lensSource), patch, targetDoc),
   };
 }
@@ -44,7 +44,7 @@ export function applyLensToPatch(
   patchSchema: JSONSchema7, // the json schema for the doc the patch was operating on
 ): Patch {
   // expand patches that set nested objects into scalar patches
-  const expandedPatch: Patch = patch.map((op) => expandPatch(op)).flat();
+  const expandedPatch: Patch = patch.flatMap((op) => expandPatch(op));
 
   // send everything through the lens
   const lensedPatch = noNulls<PatchOp>(
@@ -236,7 +236,7 @@ export function expandPatch(patchOp: PatchOp): PatchOp[] {
   if (patchOp.op !== "add" && patchOp.op !== "replace") return [patchOp];
 
   if (patchOp.value && typeof patchOp.value === "object") {
-    let result: any[] = [
+    const result: PatchOp[] = [
       {
         op: patchOp.op,
         path: patchOp.path,
@@ -244,17 +244,21 @@ export function expandPatch(patchOp: PatchOp): PatchOp[] {
       },
     ];
 
-    result = result.concat(
-      Object.entries(patchOp.value).map(([key, value]) => {
-        return expandPatch({
+    const newOps: PatchOp[][] = Object.entries(patchOp.value).map(
+      ([key, value]) => {
+        const op: PatchOp = {
           op: patchOp.op,
           path: `${patchOp.path}/${key}`,
           value,
-        });
-      }),
+        };
+        return expandPatch(op);
+      },
     );
+    for (const newOp of newOps) {
+      result.push(...newOp);
+    }
 
-    return result.flat(Infinity);
+    return result;
   }
   return [patchOp];
 }

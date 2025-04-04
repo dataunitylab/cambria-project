@@ -1,11 +1,11 @@
-import {
+import type {
   JSONSchema7,
   JSONSchema7Definition,
   JSONSchema7TypeName,
 } from "json-schema";
-import { inspect } from "util";
+import { inspect } from "node:util";
 import { defaultValuesByType } from "./defaults";
-import {
+import type {
   Property,
   LensSource,
   ConvertValue,
@@ -21,6 +21,7 @@ export const emptySchema = {
   additionalProperties: false,
 };
 
+// biome-ignore lint/suspicious/noExplicitAny: debugging
 function deepInspect(object: any) {
   return inspect(object, false, null, true);
 }
@@ -165,11 +166,8 @@ function schemaSupportsType(
   if (!typeValue) {
     return false;
   }
-  if (!Array.isArray(typeValue)) {
-    typeValue = [typeValue];
-  }
-
-  return typeValue.includes(type);
+  const wrappedTypeValue = Array.isArray(typeValue) ? typeValue : [typeValue];
+  return wrappedTypeValue.includes(type);
 }
 
 /** db
@@ -209,7 +207,7 @@ function findHost(schema: JSONSchema7, name: string): JSONSchema7 {
         return maybeHost;
       }
     }
-  } else if (schema.properties && schema.properties[name]) {
+  } else if (schema.properties?.[name]) {
     const maybeHost = schema.properties[name];
     if (maybeHost !== false && maybeHost !== true) {
       return maybeHost;
@@ -221,7 +219,8 @@ function findHost(schema: JSONSchema7, name: string): JSONSchema7 {
 function inSchema(schema: JSONSchema7, op: LensIn): JSONSchema7 {
   const properties: JSONSchema7 = schema.properties
     ? schema.properties
-    : (schema.anyOf?.find((t) => typeof t === "object" && t.properties) as any)
+    : // biome-ignore lint/suspicious/noExplicitAny: all values allowed
+      (schema.anyOf?.find((t) => typeof t === "object" && t.properties) as any)
         .properties;
 
   if (!properties) {
@@ -288,14 +287,12 @@ function mapSchema(schema: JSONSchema7, lens: LensSource) {
 }
 
 function filterScalarOrArray<T>(v: T | T[], cb: (t: T) => boolean) {
-  if (!Array.isArray(v)) {
-    v = [v];
+  let wrappedValue = Array.isArray(v) ? v : [v];
+  wrappedValue = wrappedValue.filter(cb);
+  if (wrappedValue.length === 1) {
+    return wrappedValue[0];
   }
-  v = v.filter(cb);
-  if (v.length === 1) {
-    return v[0];
-  }
-  return v;
+  return wrappedValue;
 }
 
 // XXX: THIS SHOULD REMOVE DEFAULT: NULL
@@ -303,32 +300,36 @@ function removeNullSupport(prop: JSONSchema7): JSONSchema7 | null {
   if (!supportsNull(prop)) {
     return prop;
   }
-  if (prop.type) {
-    if (prop.type === "null") {
+  let newProp = prop;
+  if (newProp.type) {
+    if (newProp.type === "null") {
       return null;
     }
 
-    prop = {
-      ...prop,
-      type: filterScalarOrArray(prop.type, (t) => t !== "null"),
+    newProp = {
+      ...newProp,
+      type: filterScalarOrArray(newProp.type, (t) => t !== "null"),
     };
 
-    if (prop.default === null) {
-      prop.default = defaultValuesByType(prop.type!); // the above always assigns a legal type
+    if (newProp.default === null) {
+      newProp.default = defaultValuesByType(newProp.type!); // the above always assigns a legal type
     }
   }
 
-  if (prop.anyOf) {
-    const newAnyOf = prop.anyOf.reduce((acc: JSONSchema7[], s) => {
+  if (newProp.anyOf) {
+    const newAnyOf = newProp.anyOf.reduce((acc: JSONSchema7[], s) => {
       const clean = removeNullSupport(db(s));
-      return clean ? [...acc, clean] : acc;
+      if (clean) {
+        acc.push(clean);
+      }
+      return acc;
     }, []);
     if (newAnyOf.length === 1) {
       return newAnyOf[0];
     }
-    prop = { ...prop, anyOf: newAnyOf };
+    newProp = { ...newProp, anyOf: newAnyOf };
   }
-  return prop;
+  return newProp;
 }
 
 function wrapProperty(schema: JSONSchema7, op: WrapProperty): JSONSchema7 {
@@ -400,13 +401,13 @@ function hoistProperty(
 ): JSONSchema7 {
   return withNullable(_schema, (schema) => {
     if (schema.properties === undefined) {
-      throw new Error(`Can't hoist when root schema isn't an object`);
+      throw new Error("Can't hoist when root schema isn't an object");
     }
     if (!host) {
-      throw new Error(`Need a \`host\` property to hoist from.`);
+      throw new Error("Need a `host` property to hoist from.");
     }
     if (!name) {
-      throw new Error(`Need to provide a \`name\` to hoist up`);
+      throw new Error("Need to provide a `name` to hoist up");
     }
 
     const { properties } = schema;
@@ -466,11 +467,11 @@ function plungeProperty(schema: JSONSchema7, host: string, name: string) {
   const { properties = {} } = schema;
 
   if (!host) {
-    throw new Error(`Need a \`host\` property to plunge into`);
+    throw new Error("Need a `host` property to plunge into");
   }
 
   if (!name) {
-    throw new Error(`Need to provide a \`name\` to plunge`);
+    throw new Error("Need to provide a `name` to plunge");
   }
 
   const destinationTypeProperties = properties[name];
@@ -488,7 +489,7 @@ function plungeProperty(schema: JSONSchema7, host: string, name: string) {
   }
 
   // add the property to the root schema
-  schema = inSchema(schema, {
+  let newSchema = inSchema(schema, {
     op: "in",
     name: host,
     lens: [
@@ -502,9 +503,9 @@ function plungeProperty(schema: JSONSchema7, host: string, name: string) {
 
   // remove it from its current parent
   // PS: ugh
-  schema = removeProperty(schema, name);
+  newSchema = removeProperty(newSchema, name);
 
-  return schema;
+  return newSchema;
 }
 
 function convertValue(schema: JSONSchema7, lensOp: ConvertValue) {

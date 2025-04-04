@@ -122,9 +122,9 @@ class CambriaLens extends HTMLPreElement {
       if (!hackYaml.lens) {
         hackYaml = { lens: hackYaml };
       }
-      value = safeDump(hackYaml);
+      const safeValue = safeDump(hackYaml);
 
-      this.compiledLens = Cambria.loadYamlLens(value);
+      this.compiledLens = Cambria.loadYamlLens(safeValue);
       this.dispatchEvent(new CustomEvent("lens-changed", { bubbles: true }));
     } catch (e) {
       this.dispatchEvent(

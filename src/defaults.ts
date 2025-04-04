@@ -1,11 +1,11 @@
 /* eslint-disable no-use-before-define */
 import { applyPatch } from "fast-json-patch";
-import {
+import type {
   JSONSchema7,
   JSONSchema7Definition,
   JSONSchema7TypeName,
 } from "json-schema";
-import { Patch } from "./patch";
+import type { Patch } from "./patch";
 
 /**
  * behaviour:
@@ -76,7 +76,8 @@ export function addDefaultValues(patch: Patch, schema: JSONSchema7): Patch {
           // Should we allow defaulting containers to non-empty? seems like no.
           // Should we fill in "default defaults" like empty string?
           // I think better to let the json schema explicitly define defaults
-          let defaultValue;
+          // biome-ignore lint/suspicious/noExplicitAny: any values allowed
+          let defaultValue: any;
           if (propSchema.type === "object") {
             defaultValue = {};
           } else if (propSchema.type === "array") {
@@ -100,9 +101,9 @@ export function addDefaultValues(patch: Patch, schema: JSONSchema7): Patch {
           }
           return [];
         }),
-      ].flat(Infinity);
+      ].flat(Number.POSITIVE_INFINITY);
     })
-    .flat(Infinity) as Patch;
+    .flat(Number.POSITIVE_INFINITY) as Patch;
 }
 
 // given a json schema and a json path to an object field somewhere in that schema,
@@ -116,8 +117,7 @@ function getPropertiesForPath(
     (schema: JSONSchema7, pathSegment: string) => {
       const types = Array.isArray(schema.type) ? schema.type : [schema.type];
       if (types.includes("object")) {
-        const schemaForProperty =
-          schema.properties && schema.properties[pathSegment];
+        const schemaForProperty = schema.properties?.[pathSegment];
         if (typeof schemaForProperty !== "object")
           throw new Error("Expected object");
         return schemaForProperty;

@@ -1,5 +1,5 @@
 import assert from "assert";
-import { JSONSchema7 } from "json-schema";
+import type { JSONSchema7 } from "json-schema";
 import { updateSchema } from "../src/json-schema";
 import {
   addProperty,
@@ -85,6 +85,7 @@ describe("transforming a json schema", () => {
     });
 
     it("fails when presented with invalid data", () => {
+      // biome-ignore lint/suspicious/noExplicitAny: testing
       const badData: any = { garbage: "input" };
       assert.throws(
         () => {
@@ -154,6 +155,7 @@ describe("transforming a json schema", () => {
     });
 
     it("fails when presented with invalid data", () => {
+      // biome-ignore lint/suspicious/noExplicitAny: testing
       const badData: any = { garbage: "input" };
       assert.throws(
         () => {

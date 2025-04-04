@@ -2,8 +2,8 @@
 // (we might write our own parser later, but at least for now
 // this avoids seeing the raw json...)
 
-import { JSONSchema7TypeName } from "json-schema";
-import {
+import type { JSONSchema7TypeName } from "json-schema";
+import type {
   LensSource,
   LensMap,
   LensIn,

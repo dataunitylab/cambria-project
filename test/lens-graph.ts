@@ -14,8 +14,8 @@ import {
   removeProperty,
 } from "../src/helpers";
 
+import type { LensGraph } from "../src/lens-graph";
 import {
-  LensGraph,
   initLensGraph,
   registerLens,
   lensGraphSchemas,

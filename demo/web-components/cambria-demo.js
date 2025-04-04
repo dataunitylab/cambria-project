@@ -60,7 +60,7 @@ class CambriaDemo extends HTMLElement {
         }
 
         .schema {  border: 1px solid black; }
-        
+
       </style>
       <div class="left block">
         <div class="thumb">Left Document</div>
@@ -84,7 +84,7 @@ class CambriaDemo extends HTMLElement {
         <div class="thumb">Last Patch</div>
         <pre class="content">... no activity ...</pre>
       </div>
-      
+
       <div class="error block">
         <div class="thumb">Last Error</div>
         <span class="content">... no errors yet ...</span>
@@ -100,9 +100,9 @@ class CambriaDemo extends HTMLElement {
     this.patch = shadow.querySelector(".patch .content");
 
     const slots = {};
-    shadow.querySelectorAll("slot").forEach((slot) => {
+    for (const slot of shadow.querySelectorAll("slot")) {
       slots[slot.name] = slot.assignedElements()[0] || slot.firstElementChild;
-    });
+    }
 
     this.left = slots.left;
 

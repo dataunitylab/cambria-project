@@ -1,4 +1,4 @@
-import { LensSource, LensOp } from "./lens-ops";
+import type { LensSource, LensOp } from "./lens-ops";
 
 function assertNever(x: never): never {
   throw new Error(`Unexpected object: ${x}`);
