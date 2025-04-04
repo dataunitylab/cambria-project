@@ -142,14 +142,12 @@ function removeProperty(
   const { properties = {}, required = [] } = schema;
   const removed = removedPointer;
   // we don't care about the `discarded` variable...
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   if (!(removed in properties)) {
     throw new Error(`Attempting to remove nonexistent property: ${removed}`);
   }
 
   // no way to discard the
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { [removed]: discarded, ...rest } = properties;
 
   return {

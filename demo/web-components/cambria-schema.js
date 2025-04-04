@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const JSONSchemaView = require("json-schema-view-js");
 
 class CambriaSchema extends HTMLElement {

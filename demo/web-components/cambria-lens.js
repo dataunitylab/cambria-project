@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const { safeLoad, safeDump } = require("js-yaml");
 const Cambria = require("../../dist");
 

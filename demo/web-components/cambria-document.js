@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const jsonpatch = require("fast-json-patch");
 const { JSONEditor } = require("@json-editor/json-editor");
 

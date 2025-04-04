@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 import { applyPatch } from "fast-json-patch";
 import type {
   JSONSchema7,

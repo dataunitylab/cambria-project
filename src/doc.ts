@@ -1,5 +1,4 @@
 import { applyPatch, compare } from "fast-json-patch";
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import type { JSONSchema7 } from "json-schema";
 import toJSONSchema from "to-json-schema";
 
@@ -45,10 +44,8 @@ export function importDoc(inputDoc: object): [JSONSchema7, Patch] {
  */
 export function applyLensToDoc(
   lensSource: LensSource,
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   inputDoc: object,
   inputSchema?: JSONSchema7,
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   targetDoc?: object,
 ): object {
   const [impliedSchema, patchForOriginalDoc] = importDoc(inputDoc);
