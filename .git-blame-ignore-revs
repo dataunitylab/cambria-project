@@ -1,3 +1,7 @@
 # .git-blame-ignore-revs
 # Reformat using Biome
 438018638f8c369ab3f0da505b111ba903901b84
+# Apply Biome linting
+4a7391b94cce44060549ac3e8bc0cc6c1b03911b
+# Reorganize imports
+7536b5d5c00c6ca956b3e5ed74498308fc4c2085
