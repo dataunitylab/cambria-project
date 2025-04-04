@@ -8,3 +8,4 @@ node_modules
 !.yarn/versions
 .nyc_output/
 coverage/
+dist/
