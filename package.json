@@ -19,6 +19,7 @@
     "to-json-schema": "^0.2.5"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@json-editor/json-editor": "^2.15.2",
     "@types/graphlib": "^2.1.12",
     "@types/mocha": "^8.2.3",
