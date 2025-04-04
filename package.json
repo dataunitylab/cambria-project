@@ -11,7 +11,7 @@
     "build-demo": "browserify --debug ./demo/web-components/cambria-demo.js -o ./demo/bundle.js"
   },
   "dependencies": {
-    "commander": "^5.1.0",
+    "commander": "^13.1.0",
     "fast-json-patch": "^3.1.1",
     "graphlib": "^2.1.8",
     "js-yaml": "^3.14.1",

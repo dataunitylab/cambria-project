@@ -14,21 +14,22 @@ program
   .option("-r, --reverse", "run the lens in reverse");
 
 program.parse(process.argv);
+const options = program.opts();
 
 // read doc from stdin if no input specified
-const input = readFileSync(program.input || 0, "utf-8");
-const baseDoc = program.base
-  ? JSON.parse(readFileSync(program.base, "utf-8"))
+const input = readFileSync(options.input || 0, "utf-8");
+const baseDoc = options.base
+  ? JSON.parse(readFileSync(options.base, "utf-8"))
   : {};
 const doc = JSON.parse(input);
-const lensData = readFileSync(program.lens, "utf-8");
+const lensData = readFileSync(options.lens, "utf-8");
 
 let lens = loadYamlLens(lensData);
 
-if (program.reverse) {
+if (options.reverse) {
   lens = reverseLens(lens);
 }
 
-const newDoc = applyLensToDoc(lens, doc, program.schema, baseDoc);
+const newDoc = applyLensToDoc(lens, doc, options.schema, baseDoc);
 
 console.log(JSON.stringify(newDoc, null, 4));

@@ -1117,7 +1117,7 @@ __metadata:
     assert: "npm:^2.1.0"
     browserify: "npm:^16.5.2"
     codecov: "npm:^3.8.3"
-    commander: "npm:^5.1.0"
+    commander: "npm:^13.1.0"
     fast-json-patch: "npm:^3.1.1"
     graphlib: "npm:^2.1.8"
     js-yaml: "npm:^3.14.1"
@@ -1302,10 +1302,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "commander@npm:5.1.0"
-  checksum: 10/3e2ef5c003c5179250161e42ce6d48e0e69a54af970c65b7f985c70095240c260fd647453efd4c2c5a31b30ce468f373dc70f769c2f54a2c014abc4792aaca28
+"commander@npm:^13.1.0":
+  version: 13.1.0
+  resolution: "commander@npm:13.1.0"
+  checksum: 10/d3b4b79e6be8471ddadacbb8cd441fe82154d7da7393b50e76165a9e29ccdb74fa911a186437b9a211d0fc071db6051915c94fb8ef16d77511d898e9dbabc6af
   languageName: node
   linkType: hard
 
