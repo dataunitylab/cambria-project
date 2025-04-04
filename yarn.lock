@@ -1121,7 +1121,7 @@ __metadata:
     fast-json-patch: "npm:^3.1.1"
     graphlib: "npm:^2.1.8"
     js-yaml: "npm:^3.14.1"
-    json-schema: "npm:^0.2.5"
+    json-schema: "npm:^0.4.0"
     json-schema-view-js: "npm:^2.0.1"
     mocha: "npm:^8.4.0"
     nyc: "npm:^17.1.0"
@@ -2767,10 +2767,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json-schema@npm:^0.2.5":
-  version: 0.2.5
-  resolution: "json-schema@npm:0.2.5"
-  checksum: 10/1731319bdae25103699e7f17a0fec0db649544e63628e5e6f7bce0dc68525dd6766d59e645caa5606933ced0ad292e601e53bdcab402c0ebc3795e0a8ee6f1ee
+"json-schema@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "json-schema@npm:0.4.0"
+  checksum: 10/8b3b64eff4a807dc2a3045b104ed1b9335cd8d57aa74c58718f07f0f48b8baa3293b00af4dcfbdc9144c3aafea1e97982cc27cc8e150fc5d93c540649507a458
   languageName: node
   linkType: hard
 
