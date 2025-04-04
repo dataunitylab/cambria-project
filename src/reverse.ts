@@ -1,76 +1,76 @@
-import { LensSource, LensOp } from './lens-ops'
+import { LensSource, LensOp } from "./lens-ops";
 
 function assertNever(x: never): never {
-  throw new Error(`Unexpected object: ${x}`)
+  throw new Error(`Unexpected object: ${x}`);
 }
 
 export function reverseLens(lens: LensSource): LensSource {
   return lens
     .slice()
     .reverse()
-    .map((l) => reverseLensOp(l))
+    .map((l) => reverseLensOp(l));
 }
 
 function reverseLensOp(lensOp: LensOp): LensOp {
   switch (lensOp.op) {
-    case 'rename':
+    case "rename":
       return {
         ...lensOp,
         source: lensOp.destination,
         destination: lensOp.source,
-      }
+      };
 
-    case 'add': {
+    case "add": {
       return {
         ...lensOp,
-        op: 'remove',
-      }
+        op: "remove",
+      };
     }
 
-    case 'remove':
+    case "remove":
       return {
         ...lensOp,
-        op: 'add',
-      }
+        op: "add",
+      };
 
-    case 'wrap':
+    case "wrap":
       return {
         ...lensOp,
-        op: 'head',
-      }
-    case 'head':
+        op: "head",
+      };
+    case "head":
       return {
         ...lensOp,
-        op: 'wrap',
-      }
+        op: "wrap",
+      };
 
-    case 'in':
-    case 'map':
-      return { ...lensOp, lens: reverseLens(lensOp.lens) }
+    case "in":
+    case "map":
+      return { ...lensOp, lens: reverseLens(lensOp.lens) };
 
-    case 'hoist':
+    case "hoist":
       return {
         ...lensOp,
-        op: 'plunge',
-      }
-    case 'plunge':
+        op: "plunge",
+      };
+    case "plunge":
       return {
         ...lensOp,
-        op: 'hoist',
-      }
-    case 'convert': {
-      const mapping = [lensOp.mapping[1], lensOp.mapping[0]]
+        op: "hoist",
+      };
+    case "convert": {
+      const mapping = [lensOp.mapping[1], lensOp.mapping[0]];
       const reversed = {
         ...lensOp,
         mapping,
         sourceType: lensOp.destinationType,
         destinationType: lensOp.sourceType,
-      }
+      };
 
-      return reversed
+      return reversed;
     }
 
     default:
-      return assertNever(lensOp) // exhaustiveness check
+      return assertNever(lensOp); // exhaustiveness check
   }
 }

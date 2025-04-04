@@ -2,7 +2,7 @@
 // (we might write our own parser later, but at least for now
 // this avoids seeing the raw json...)
 
-import { JSONSchema7TypeName } from 'json-schema'
+import { JSONSchema7TypeName } from "json-schema";
 import {
   LensSource,
   LensMap,
@@ -17,86 +17,89 @@ import {
   HeadProperty,
   ValueMapping,
   ConvertValue,
-} from './lens-ops'
+} from "./lens-ops";
 
 export function addProperty(property: Property): AddProperty {
   return {
-    op: 'add',
+    op: "add",
     ...property,
-  }
+  };
 }
 
 export function removeProperty(property: Property): RemoveProperty {
   return {
-    op: 'remove',
+    op: "remove",
     ...property,
-  }
+  };
 }
 
-export function renameProperty(source: string, destination: string): RenameProperty {
+export function renameProperty(
+  source: string,
+  destination: string,
+): RenameProperty {
   return {
-    op: 'rename',
+    op: "rename",
     source,
     destination,
-  }
+  };
 }
 
 export function hoistProperty(host: string, name: string): HoistProperty {
   return {
-    op: 'hoist',
+    op: "hoist",
     host,
     name,
-  }
+  };
 }
 
 export function plungeProperty(host: string, name: string): PlungeProperty {
   return {
-    op: 'plunge',
+    op: "plunge",
     host,
     name,
-  }
+  };
 }
 
 export function wrapProperty(name: string): WrapProperty {
   return {
-    op: 'wrap',
+    op: "wrap",
     name,
-  }
+  };
 }
 
 export function headProperty(name: string): HeadProperty {
   return {
-    op: 'head',
+    op: "head",
     name,
-  }
+  };
 }
 
 export function inside(name: string, lens: LensSource): LensIn {
   return {
-    op: 'in',
+    op: "in",
     name,
     lens,
-  }
+  };
 }
 
 export function map(lens: LensSource): LensMap {
   return {
-    op: 'map',
+    op: "map",
     lens,
-  }
+  };
 }
 
 export function convertValue(
   name: string,
   mapping: ValueMapping,
   sourceType?: JSONSchema7TypeName,
-  destinationType?: JSONSchema7TypeName
+  destinationType?: JSONSchema7TypeName,
 ): ConvertValue {
   return {
-    op: 'convert',
+    op: "convert",
     name,
     mapping,
     sourceType,
     destinationType,
-  }
+  };
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const JSONSchemaView = require('json-schema-view-js')
+const JSONSchemaView = require("json-schema-view-js");
 
 class CambriaSchema extends HTMLElement {
   css = `.json-schema-view,
@@ -112,21 +112,21 @@ class CambriaSchema extends HTMLElement {
   json-schema-view.collapsed .toggle-handle {
     transform: rotate(-90deg);
   }
-  `
+  `;
   constructor() {
-    super()
-    this.shadow = this.attachShadow({ mode: 'open' })
-    this.shadow.innerHTML = `<style>${this.css}</style><div class="attach"></div>`
+    super();
+    this.shadow = this.attachShadow({ mode: "open" });
+    this.shadow.innerHTML = `<style>${this.css}</style><div class="attach"></div>`;
   }
 
   setSchema(schema) {
-    const view = new JSONSchemaView.default(schema, 1)
+    const view = new JSONSchemaView.default(schema, 1);
 
-    const attach = this.shadow.querySelector('.attach')
-    attach.innerHTML = ''
-    attach.appendChild(view.render())
+    const attach = this.shadow.querySelector(".attach");
+    attach.innerHTML = "";
+    attach.appendChild(view.render());
   }
 }
 
 // Define the new element
-customElements.define('cambria-schema', CambriaSchema)
+customElements.define("cambria-schema", CambriaSchema);

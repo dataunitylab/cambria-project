@@ -1,12 +1,12 @@
-require('./cambria-document')
-require('./cambria-lens')
-require('./cambria-schema')
+require("./cambria-document");
+require("./cambria-lens");
+require("./cambria-schema");
 
 class CambriaDemo extends HTMLElement {
-  template = document.createElement('template')
+  template = document.createElement("template");
 
   constructor() {
-    super()
+    super();
 
     this.template.innerHTML = `
       <style>
@@ -88,61 +88,67 @@ class CambriaDemo extends HTMLElement {
       <div class="error block">
         <div class="thumb">Last Error</div>
         <span class="content">... no errors yet ...</span>
-      </div>`
+      </div>`;
 
     // Create a shadow root
-    const shadow = this.attachShadow({ mode: 'open' })
+    const shadow = this.attachShadow({ mode: "open" });
 
-    const result = this.template.content.cloneNode(true)
-    shadow.appendChild(result)
+    const result = this.template.content.cloneNode(true);
+    shadow.appendChild(result);
 
-    this.error = shadow.querySelector('.error .content')
-    this.patch = shadow.querySelector('.patch .content')
+    this.error = shadow.querySelector(".error .content");
+    this.patch = shadow.querySelector(".patch .content");
 
-    const slots = {}
-    shadow.querySelectorAll('slot').forEach((slot) => {
-      slots[slot.name] = slot.assignedElements()[0] || slot.firstElementChild
-    })
+    const slots = {};
+    shadow.querySelectorAll("slot").forEach((slot) => {
+      slots[slot.name] = slot.assignedElements()[0] || slot.firstElementChild;
+    });
 
-    this.left = slots.left
+    this.left = slots.left;
 
-    this.leftSchema = shadow.querySelector('.left .schema')
-    this.rightSchema = shadow.querySelector('.right .schema')
+    this.leftSchema = shadow.querySelector(".left .schema");
+    this.rightSchema = shadow.querySelector(".right .schema");
 
-    this.right = slots.right
-    this.lens = slots.lens
+    this.right = slots.right;
+    this.lens = slots.lens;
 
-    slots.lens.addEventListener('lens-changed', (e) => {
+    slots.lens.addEventListener("lens-changed", (e) => {
       // trigger a re-processing of the document
-      this.right.clear()
-      this.left.importDoc()
-    })
+      this.right.clear();
+      this.left.importDoc();
+    });
 
-    this.left.addEventListener('doc-change', (e) => {
-      this.leftSchema.setSchema(e.detail.schema)
-      const { patch, schema } = this.lens.translateChange(e.detail)
-      this.rightSchema.setSchema(schema)
-      this.right.applyChange({ patch, schema })
-      console.log('doc-change', e)
-    })
+    this.left.addEventListener("doc-change", (e) => {
+      this.leftSchema.setSchema(e.detail.schema);
+      const { patch, schema } = this.lens.translateChange(e.detail);
+      this.rightSchema.setSchema(schema);
+      this.right.applyChange({ patch, schema });
+      console.log("doc-change", e);
+    });
 
-    this.left.addEventListener('doc-patch', (e) => {
-      const { patch } = this.lens.translatePatch(e.detail)
-      this.right.applyPatch({ patch })
-      console.log('doc-patch', e)
-    })
+    this.left.addEventListener("doc-patch", (e) => {
+      const { patch } = this.lens.translatePatch(e.detail);
+      this.right.applyPatch({ patch });
+      console.log("doc-patch", e);
+    });
 
-    this.right.addEventListener('doc-change', (e) => {
-      const { patch, schema } = this.lens.translateChange({ ...e.detail, reverse: true })
-      this.left.applyChange({ patch, schema })
-      console.log('doc-change from right', e)
-    })
+    this.right.addEventListener("doc-change", (e) => {
+      const { patch, schema } = this.lens.translateChange({
+        ...e.detail,
+        reverse: true,
+      });
+      this.left.applyChange({ patch, schema });
+      console.log("doc-change from right", e);
+    });
 
-    this.right.addEventListener('doc-patch', (e) => {
-      const { patch } = this.lens.translatePatch({ ...e.detail, reverse: true })
-      this.left.applyPatch({ patch })
-      console.log('doc-patchfrom right', e)
-    })
+    this.right.addEventListener("doc-patch", (e) => {
+      const { patch } = this.lens.translatePatch({
+        ...e.detail,
+        reverse: true,
+      });
+      this.left.applyPatch({ patch });
+      console.log("doc-patchfrom right", e);
+    });
 
     /*
     // ehhhhhh
@@ -208,13 +214,13 @@ class CambriaDemo extends HTMLElement {
       destination.dispatchEvent(new CustomEvent('doc-patch', { detail }))
     }) */
 
-    this.left.importDoc()
+    this.left.importDoc();
   }
 
   renderSchema(target, schema) {
-    target.innerText = JSON.stringify(schema, null, 2)
+    target.innerText = JSON.stringify(schema, null, 2);
   }
 }
 
 // Define the new element
-customElements.define('cambria-demo', CambriaDemo)
+customElements.define("cambria-demo", CambriaDemo);
