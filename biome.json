@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["dist/", "coverage/", ".nyc_output/"]
+    "ignore": ["demo/", "dist/", "coverage/", ".nyc_output/"]
   },
   "formatter": {
     "enabled": true,
@@ -21,6 +21,7 @@
     "rules": {
       "recommended": true,
       "style": {
+        "useNodejsImportProtocol": "off",
         "noNonNullAssertion": "off",
         "noUselessElse": "off"
       }

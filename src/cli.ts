@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync } from "fs";
 import { program } from "commander";
 
 import { applyLensToDoc } from "./doc";
