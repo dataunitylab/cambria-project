@@ -1,9 +1,9 @@
-import { program } from "commander";
 import { readFileSync } from "node:fs";
+import { program } from "commander";
 
-import { reverseLens } from "./reverse";
 import { applyLensToDoc } from "./doc";
 import { loadYamlLens } from "./lens-loader";
+import { reverseLens } from "./reverse";
 
 program
   .description("// A CLI document conversion tool for cambria")

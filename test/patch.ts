@@ -1,24 +1,24 @@
 import assert from "assert";
-import type { Patch, PatchOp } from "../src/patch";
-import { applyLensToPatch, expandPatch } from "../src/patch";
 import { applyLensToDoc } from "../src/doc";
-import { updateSchema, schemaForLens } from "../src/json-schema";
-import type { LensSource } from "../src/lens-ops";
 import {
-  renameProperty,
   addProperty,
+  convertValue,
+  headProperty,
+  hoistProperty,
   inside,
   map,
-  hoistProperty,
   plungeProperty,
+  renameProperty,
   wrapProperty,
-  headProperty,
-  convertValue,
 } from "../src/helpers";
+import { schemaForLens, updateSchema } from "../src/json-schema";
+import type { LensSource } from "../src/lens-ops";
+import type { Patch, PatchOp } from "../src/patch";
+import { applyLensToPatch, expandPatch } from "../src/patch";
 
-import { reverseLens } from "../src/reverse";
 import type { ReplaceOperation } from "fast-json-patch";
 import type { JSONSchema7 } from "json-schema";
+import { reverseLens } from "../src/reverse";
 
 interface ProjectV1 {
   title: string;

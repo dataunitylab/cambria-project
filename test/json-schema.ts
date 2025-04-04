@@ -1,17 +1,17 @@
 import assert from "assert";
 import type { JSONSchema7 } from "json-schema";
-import { updateSchema } from "../src/json-schema";
 import {
   addProperty,
+  convertValue,
+  headProperty,
+  hoistProperty,
   inside,
   map,
-  headProperty,
-  wrapProperty,
-  hoistProperty,
   plungeProperty,
   renameProperty,
-  convertValue,
+  wrapProperty,
 } from "../src/helpers";
+import { updateSchema } from "../src/json-schema";
 
 describe("transforming a json schema", () => {
   const v1Schema = {

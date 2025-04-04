@@ -2,9 +2,9 @@
 // testing a complex doc + lens
 
 import assert from "assert";
-import githubIssue from "./github-issue.json";
 import { applyLensToDoc } from "../src/doc";
 import { reverseLens } from "../src/reverse";
+import githubIssue from "./github-issue.json";
 
 describe("renaming title, and hoisting label name to category", () => {
   const lens = [

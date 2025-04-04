@@ -4,19 +4,19 @@
 
 import type { JSONSchema7TypeName } from "json-schema";
 import type {
-  LensSource,
-  LensMap,
-  LensIn,
-  Property,
   AddProperty,
+  ConvertValue,
+  HeadProperty,
+  HoistProperty,
+  LensIn,
+  LensMap,
+  LensSource,
+  PlungeProperty,
+  Property,
   RemoveProperty,
   RenameProperty,
-  HoistProperty,
-  PlungeProperty,
-  WrapProperty,
-  HeadProperty,
   ValueMapping,
-  ConvertValue,
+  WrapProperty,
 } from "./lens-ops";
 
 export function addProperty(property: Property): AddProperty {

@@ -1,18 +1,18 @@
+import { inspect } from "node:util";
 import type {
   JSONSchema7,
   JSONSchema7Definition,
   JSONSchema7TypeName,
 } from "json-schema";
-import { inspect } from "node:util";
 import { defaultValuesByType } from "./defaults";
 import type {
-  Property,
-  LensSource,
   ConvertValue,
-  LensOp,
   HeadProperty,
-  WrapProperty,
   LensIn,
+  LensOp,
+  LensSource,
+  Property,
+  WrapProperty,
 } from "./lens-ops";
 
 export const emptySchema = {

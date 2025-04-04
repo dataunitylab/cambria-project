@@ -1,13 +1,13 @@
+import { applyPatch, compare } from "fast-json-patch";
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import type { JSONSchema7 } from "json-schema";
-import { compare, applyPatch } from "fast-json-patch";
 import toJSONSchema from "to-json-schema";
 
 import { defaultObjectForSchema } from "./defaults";
+import { updateSchema } from "./json-schema";
+import type { LensSource } from "./lens-ops";
 import type { Patch } from "./patch";
 import { applyLensToPatch } from "./patch";
-import type { LensSource } from "./lens-ops";
-import { updateSchema } from "./json-schema";
 
 /**
  * importDoc - convert any Plain Old Javascript Object into an implied JSON Schema and

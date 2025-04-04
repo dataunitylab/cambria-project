@@ -1,25 +1,25 @@
 import assert from "assert";
 import { JSONSchema7 } from "json-schema";
-import { updateSchema } from "../src/json-schema";
 import {
   addProperty,
+  convertValue,
+  headProperty,
+  hoistProperty,
   inside,
   map,
-  headProperty,
-  wrapProperty,
-  hoistProperty,
   plungeProperty,
-  renameProperty,
-  convertValue,
   removeProperty,
+  renameProperty,
+  wrapProperty,
 } from "../src/helpers";
+import { updateSchema } from "../src/json-schema";
 
 import type { LensGraph } from "../src/lens-graph";
 import {
   initLensGraph,
-  registerLens,
-  lensGraphSchemas,
   lensFromTo,
+  lensGraphSchemas,
+  registerLens,
 } from "../src/lens-graph";
 
 const LensMutoV1 = [addProperty({ name: "title", type: "string" })];
