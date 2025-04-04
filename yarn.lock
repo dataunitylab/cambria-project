@@ -378,12 +378,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@json-editor/json-editor@npm:^2.15.2":
-  version: 2.15.2
-  resolution: "@json-editor/json-editor@npm:2.15.2"
+"@json-editor/json-editor@npm:2.6.1":
+  version: 2.6.1
+  resolution: "@json-editor/json-editor@npm:2.6.1"
   dependencies:
-    core-js: "npm:^3.27.2"
-  checksum: 10/e7fcd08307b821a17d1466eb40511806166b7aafd697dcd95e1baf1c86d697bc46053153de3c0cea2a641b8ed23f5221d217da8a5f8b4471acacb4c963748ef6
+    core-js: "npm:^3.12.1"
+  checksum: 10/f320c9ffc1483efdaec27b3e0b6e83152ebbd1954d2135ed5485d21f96774142f6fbc8c13e88a3ef16da35855c39f18450c66f54ff35245b63cc904532d16df3
   languageName: node
   linkType: hard
 
@@ -1109,7 +1109,7 @@ __metadata:
   resolution: "cambria@workspace:."
   dependencies:
     "@biomejs/biome": "npm:1.9.4"
-    "@json-editor/json-editor": "npm:^2.15.2"
+    "@json-editor/json-editor": "npm:2.6.1"
     "@types/graphlib": "npm:^2.1.12"
     "@types/mocha": "npm:^10.0.10"
     "@types/node": "npm:^14.18.63"
@@ -1370,7 +1370,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.27.2":
+"core-js@npm:^3.12.1":
   version: 3.41.0
   resolution: "core-js@npm:3.41.0"
   checksum: 10/a06ebae2264dd24c8e4b331a68412f7d0730557c41901f80fa910a9398dbef4670482d9ef5a41fef7efd41307c612d3d4051df7640ac4c01ff6feda45f8b92be
