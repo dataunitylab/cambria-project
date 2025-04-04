@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["dist/", "coverage/"]
+    "ignore": ["dist/", "coverage/", ".nyc_output/"]
   },
   "formatter": {
     "enabled": true,
