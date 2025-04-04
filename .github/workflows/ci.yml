@@ -43,3 +43,13 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+  deploy-demo:
+    needs: build
+    if: github.ref == 'refs/heads/default'
+    uses: ./.github/workflows/demo.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    secrets: inherit
