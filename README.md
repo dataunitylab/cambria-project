@@ -77,4 +77,4 @@ If you're using npm, run `npm install cambria`. If you're using yarn, run `yarn 
 
 ## Tests
 
-`npm run test`
+`yarn test`
