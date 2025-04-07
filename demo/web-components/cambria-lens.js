@@ -1,4 +1,4 @@
-const { safeLoad, safeDump } = require("js-yaml");
+const { load, dump } = require("js-yaml");
 const Cambria = require("../../dist");
 
 // Sends `lens-compiled` events when it gets a new, good lens.
@@ -117,13 +117,13 @@ class CambriaLens extends HTMLPreElement {
   }
   handleInput(value) {
     try {
-      let hackYaml = safeLoad(value);
+      let hackYaml = load(value);
       if (!hackYaml.lens) {
         hackYaml = { lens: hackYaml };
       }
-      const safeValue = safeDump(hackYaml);
+      const hackValue = dump(hackYaml);
 
-      this.compiledLens = Cambria.loadYamlLens(safeValue);
+      this.compiledLens = Cambria.loadYamlLens(hackValue);
       this.dispatchEvent(new CustomEvent("lens-changed", { bubbles: true }));
     } catch (e) {
       this.dispatchEvent(
