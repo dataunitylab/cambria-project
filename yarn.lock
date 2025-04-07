@@ -283,6 +283,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dagrejs/graphlib@npm:^2.1.8":
+  version: 2.2.4
+  resolution: "@dagrejs/graphlib@npm:2.2.4"
+  checksum: 10/1fc5393525a3d666284ca740867d082768bc87ff61f5f181eb5c1a73c1a6e328ad23581f7415c81df2614171b8a4b4a8e6a417eefd7f9fca74a4a625ec3aa848
+  languageName: node
+  linkType: hard
+
 "@gerrit0/mini-shiki@npm:^3.2.2":
   version: 3.2.2
   resolution: "@gerrit0/mini-shiki@npm:3.2.2"
@@ -1171,6 +1178,7 @@ __metadata:
   resolution: "cambria@workspace:."
   dependencies:
     "@biomejs/biome": "npm:1.9.4"
+    "@dagrejs/graphlib": "npm:^2.1.8"
     "@json-editor/json-editor": "npm:2.6.1"
     "@types/graphlib": "npm:^2.1.12"
     "@types/mocha": "npm:^10.0.10"
@@ -1180,7 +1188,6 @@ __metadata:
     codecov: "npm:^3.8.3"
     commander: "npm:^13.1.0"
     fast-json-patch: "npm:^3.1.1"
-    graphlib: "npm:^2.1.8"
     js-yaml: "npm:^4.1.0"
     json-schema: "npm:^0.4.0"
     json-schema-view-js: "npm:^2.0.1"
@@ -2189,15 +2196,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphlib@npm:^2.1.8":
-  version: 2.1.8
-  resolution: "graphlib@npm:2.1.8"
-  dependencies:
-    lodash: "npm:^4.17.15"
-  checksum: 10/37cbd851d3c1fb99f3174750ccaa22305d23d11746e5df81a38ba3bf25c0ba29cd9658ba69a0159ea81d56c28e8e875033eeaaa7167d838419fae08d9cd2c62c
-  languageName: node
-  linkType: hard
-
 "growl@npm:1.10.5":
   version: 1.10.5
   resolution: "growl@npm:1.10.5"
@@ -2932,13 +2930,6 @@ __metadata:
   version: 4.5.0
   resolution: "lodash.xor@npm:4.5.0"
   checksum: 10/9db74ebfd455cd062f3ec4243c34b4a0d5a08ab4b6d0aacf68962ecb11160c4e022d9e8163ce16b8fd6c25f1629d3d6b2fd586204df0d270f0b425ea4577f938
-  languageName: node
-  linkType: hard
-
-"lodash@npm:^4.17.15":
-  version: 4.17.19
-  resolution: "lodash@npm:4.17.19"
-  checksum: 10/2174baff115e9d4d56c7eb2fabaa2f4d934d0aac6ad6b4e1000354aeb5a7342d3c9cd566b3ec223e580b6ecedc87dfec01f1744adb14d26227a4fef0c47ee16c
   languageName: node
   linkType: hard
 
