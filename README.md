@@ -2,7 +2,7 @@
 [![CI](https://github.com/dataunitylab/cambria-project/actions/workflows/ci.yml/badge.svg)](https://github.com/dataunitylab/cambria-project/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/dataunitylab/cambria-project/graph/badge.svg?token=CWIND9R9RN)](https://codecov.io/gh/dataunitylab/cambria-project)
 
-Cambria is a Javascript/Typescript library for converting JSON data between related schemas.
+Cambria is a JavaScript/Typescript library for converting JSON data between related schemas.
 
 You specify (in YAML or JSON) a _lens_, which specifies a data transformation. Cambria lets you use this lens to convert:
 
@@ -29,7 +29,7 @@ Cambria includes a simple CLI tool for converting JSON from the command line.
 
 (You'll want to run `yarn build` to compile the latest code.)
 
-Covert the github issue into a an arthropod-style issue:
+Covert the GitHub issue into an arthropod-style issue:
 
 `cat ./demo/github-issue.json | node ./dist/cli.js -l ./demo/github-arthropod.lens.yml`
 
@@ -37,7 +37,7 @@ To get a live updating pipeline using `entr`:
 
 `echo ./demo/github-arthropod.lens.yml | entr bash -c "cat ./demo/github-issue.json | node ./dist/cli.js -l ./demo/github-arthropod.lens.yml > ./demo/simple-issue.json"`
 
-Compile back from an updated "simple issue" to a new github issue file:
+Compile back from an updated "simple issue" to a new GitHub issue:
 
 `cat ./demo/simple-issue.json | node ./dist/cli.js -l ./demo/github-arthropod.lens.yml -r -b ./demo/github-issue.json`
 
@@ -47,7 +47,7 @@ Live updating pipeline backwards:
 
 ## API Usage
 
-Cambria is mostly intended to be used as a Typescript / Javascript library. Here's a simple example of converting an entire document.
+Cambria is mostly intended to be used as a Typescript / JavaScript library. Here's a simple example of converting an entire document.
 
 ```js
 // read doc from stdin if no input specified
