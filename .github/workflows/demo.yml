@@ -21,15 +21,19 @@ jobs:
         cache: 'yarn'
     - name: Install dependencies
       run: yarn
+    - name: Build docs
+      run: yarn doc
     - name: Build distribution
       run: yarn build
     - name: Bundle demo
       run: yarn build-demo
+    - name: Copy demo to site
+      run: cp -r demo/ docs/
     - name: Upload static files as artifact
       id: deployment
       uses: actions/upload-pages-artifact@v3
       with:
-        path: demo/
+        path: docs/
 
   deploy:
     name: Deploy demo

@@ -6,9 +6,10 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --outDir ./dist --project ./tsconfig.json",
-    "test": "nyc --reporter=lcov mocha -r ts-node/register test/**.ts",
+    "build-demo": "browserify --debug ./demo/web-components/cambria-demo.js -o ./demo/bundle.js",
+    "doc": "yarn typedoc src/index.ts",
     "prepare": "yarn run build",
-    "build-demo": "browserify --debug ./demo/web-components/cambria-demo.js -o ./demo/bundle.js"
+    "test": "nyc --reporter=lcov mocha -r ts-node/register test/**.ts"
   },
   "dependencies": {
     "commander": "^13.1.0",
@@ -32,6 +33,7 @@
     "mocha": "^8.4.0",
     "nyc": "^17.1.0",
     "ts-node": "^10.9.2",
+    "typedoc": "^0.28.2",
     "typescript": "^5.8.2"
   },
   "packageManager": "yarn@4.8.1"
