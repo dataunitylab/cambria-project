@@ -28,7 +28,7 @@ export function loadLens(rawLens: YAMLLens): LensSource {
 }
 
 export function loadYamlLens(lensData: string): LensSource {
-  const rawLens = YAML.safeLoad(lensData) as YAMLLens;
+  const rawLens = YAML.load(lensData) as YAMLLens;
   if (!rawLens || typeof rawLens !== "object")
     throw new Error("Error loading lens");
   if (!("lens" in rawLens))
