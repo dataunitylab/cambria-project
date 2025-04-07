@@ -1,4 +1,4 @@
-import { Graph, alg, json } from "graphlib";
+import { Graph, alg, json } from "@dagrejs/graphlib";
 import type { JSONSchema7 } from "json-schema";
 import type { LensOp, LensSource } from ".";
 import { reverseLens, updateSchema } from ".";
