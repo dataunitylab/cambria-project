@@ -35,5 +35,11 @@
     "typedoc": "^0.28.2",
     "typescript": "^5.8.3"
   },
+  "resolutions": {
+    "braces": ">=3.0.3",
+    "elliptic": ">=6.6.1",
+    "minimist": ">=1.2.6",
+    "shell-quote": ">=1.7.3"
+  },
   "packageManager": "yarn@4.8.1"
 }
