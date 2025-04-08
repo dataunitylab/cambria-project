@@ -10,3 +10,9 @@ node_modules
 coverage/
 dist/
 docs/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
