@@ -1,0 +1,27 @@
+name: Run Playwright tests
+on:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  runs-on: ubuntu-latest
+  if: contains(github.event.comment.html_url, '/pull/') && github.event.comment.user.login == 'netlify[bot]' && contains(github.event.comment.body, 'ready!')
+  steps:
+      - run: git config --global core.autocrlf input
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run tests
+        env:
+          PLAYWRIGHT_TEST_BASE_URL: https://deploy-preview-${{ github.event.issue.number }}--cambria-project.netlify.app
+        run: yarn playwright test
