@@ -39,7 +39,10 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn
+        run: yarn install --immutable
+
+      - name: Check for duplicate dependencies
+        run: yarn dedupe --check
 
       - name: Test
         run: yarn test
