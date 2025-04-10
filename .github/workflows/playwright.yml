@@ -1,12 +1,14 @@
-name: Run Playwright tests
+name: Playwright
 on:
   issue_comment:
     types: [created, edited]
-
+permissions:
+  contents: read
 jobs:
-  runs-on: ubuntu-latest
-  if: contains(github.event.comment.html_url, '/pull/') && github.event.comment.user.login == 'netlify[bot]' && contains(github.event.comment.body, 'ready!')
-  steps:
+  playwright:
+    runs-on: ubuntu-latest
+    if: contains(github.event.comment.html_url, '/pull/') && github.event.comment.user.login == 'netlify[bot]' && contains(github.event.comment.body, 'ready!')
+    steps:
       - run: git config --global core.autocrlf input
       - uses: actions/checkout@v4
         with:
