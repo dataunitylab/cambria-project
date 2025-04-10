@@ -3,12 +3,38 @@ on:
   issue_comment:
     types: [created, edited]
 permissions:
-  contents: read
+  contents: write
+  statuses: write
 jobs:
   playwright:
     runs-on: ubuntu-latest
     if: contains(github.event.comment.html_url, '/pull/') && github.event.comment.user.login == 'netlify[bot]' && contains(github.event.comment.body, 'ready!')
     steps:
+      - name: Mark pending status
+        uses: actions/github-script@v7
+        if: always()
+        id: pending_status
+        with:
+          script: |
+            // Get the most recent commit on the PR
+            const commits = await github.rest.pulls.listCommits({
+              owner: context.issue.owner,
+              repo: context.issue.repo,
+              pull_number: context.issue.number,
+              per_page: 1
+            });
+            const headCommit = commits.data[0].sha;
+            const commitStatus = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: headCommit,
+              state: 'pending',
+              target_url: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              context: 'Playwright'
+            };
+            await github.rest.repos.createCommitStatus(commitStatus);
+            return commitStatus;
+
       - run: git config --global core.autocrlf input
       - uses: actions/checkout@v4
         with:
@@ -27,6 +53,21 @@ jobs:
         run: yarn playwright install --with-deps
 
       - name: Run tests
+        id: playwright_test
         env:
           PLAYWRIGHT_TEST_BASE_URL: https://deploy-preview-${{ github.event.issue.number }}--cambria-project.netlify.app
         run: yarn playwright test
+
+      - name: Update commit status
+        uses: actions/github-script@v7
+        if: always()
+        env:
+          COMMIT_STATUS: ${{ steps.pending_status.outputs.result }}
+          TEST_STATUS: ${{ steps.playwright_test.outcome == 'success' && 'success' || 'failure' }}
+        with:
+          script: |
+            // Get the most recent commit on the PR
+            const commitStatus = JSON.parse(process.env.COMMIT_STATUS);
+            commitStatus.state = process.env.TEST_STATUS;
+            commitStatus.target_url = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            await github.rest.repos.createCommitStatus(commitStatus);
