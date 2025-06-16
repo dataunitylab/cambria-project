@@ -550,10 +550,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^14.18.63":
-  version: 14.18.63
-  resolution: "@types/node@npm:14.18.63"
-  checksum: 10/82a7775898c2ea6db0b610a463512206fb2c7adc1af482c7eb44b99d94375fff51c74f67ae75a63c5532971159f30c866a4d308000624ef02fd9a7175e277019
+"@types/node@npm:^24.0.3":
+  version: 24.0.3
+  resolution: "@types/node@npm:24.0.3"
+  dependencies:
+    undici-types: "npm:~7.8.0"
+  checksum: 10/6cce0afa9b0ff7f8eab7cb0339909c1e4ef480b824b8de5adc9cee05dac63ee3d8c7a46e1f95f13ecc94e84608118741f9949527a92fbf3f0e1f7714b37a7b61
   languageName: node
   linkType: hard
 
@@ -1151,7 +1153,7 @@ __metadata:
     "@playwright/test": "npm:^1.51.1"
     "@types/graphlib": "npm:^2.1.12"
     "@types/mocha": "npm:^10.0.10"
-    "@types/node": "npm:^14.18.63"
+    "@types/node": "npm:^24.0.3"
     assert: "npm:^2.1.0"
     browserify: "npm:^17.0.1"
     codecov: "npm:^3.8.3"
@@ -4454,6 +4456,13 @@ __metadata:
   bin:
     undeclared-identifiers: bin.js
   checksum: 10/e1f2a18d7bf735ec2b9ee464a621d8db72768e75e59334d34d1f7085e21558c621cc105dfd4cc7a0a219b91c43b71fbdea0508cdbe3b3396ed96902c6d5d590e
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~7.8.0":
+  version: 7.8.0
+  resolution: "undici-types@npm:7.8.0"
+  checksum: 10/fcff3fbab234f067fbd69e374ee2c198ba74c364ceaf6d93db7ca267e784457b5518cd01d0d2329b075f412574205ea3172a9a675facb49b4c9efb7141cd80b7
   languageName: node
   linkType: hard
 
