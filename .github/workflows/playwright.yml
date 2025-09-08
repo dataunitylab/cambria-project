@@ -11,7 +11,7 @@ jobs:
     if: contains(github.event.comment.html_url, '/pull/') && github.event.comment.user.login == 'netlify[bot]' && contains(github.event.comment.body, 'ready!')
     steps:
       - name: Mark pending status
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         if: always()
         id: pending_status
         with:
@@ -59,7 +59,7 @@ jobs:
         run: yarn playwright test
 
       - name: Update commit status
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         if: always()
         env:
           COMMIT_STATUS: ${{ steps.pending_status.outputs.result }}
