@@ -30,7 +30,7 @@
     "browserify": "^17.0.1",
     "codecov": "^3.8.3",
     "json-schema-view-js": "^2.0.1",
-    "mocha": "11.1.0",
+    "mocha": "11.7.2",
     "nyc": "^17.1.0",
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.2",
